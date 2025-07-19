@@ -26,7 +26,10 @@
 
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
+	{% block main %}
+
+    {% endblock %}
+
 	  
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
@@ -43,7 +46,7 @@
 	          <li class="nav-item"><a href="#services-section" class="nav-link"><span>Services</span></a></li>-->
 	          <li class="nav-item"><a href="#skills-section" class="nav-link"><span>Skills</span></a></li>
 	          <li class="nav-item"><a href="#projects-section" class="nav-link"><span>Projects</span></a></li>
-	          <li class="nav-item"><a href="#blog-section" class="nav-link"><span>My Blog</span></a></li>
+	          <li class="nav-item"><a href="#blog-section" class="nav-link"><span>Blog</span></a></li>
 	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
 			</ul>
 	      </div>
@@ -443,7 +446,44 @@
 
 
 
-   <!--<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
+   <section class="ftco-section ftco-project" id="blog-section">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+          	<h1 class="big big-2">Blogs</h1>
+            <h2 class="mb-4">Our Blogs</h2><br><br><br><br>
+								<div class="row gy-4">{% for article in articles %}
+								<div class="col-lg-4 col-md-6">
+									<div class="blog-entry">
+									{% if article.image %}
+										<a href="{% url 'blog_detail' article.slug %}"> <img src="{{ article.image.url }}" alt="{{article.title}}" class="blog-post-thumbnail
+										img-fluid"></a>
+									 {% endif %} 
+									<div class="text mt-3">
+				
+										<h3 class="heading"><a href="{% url 'blog_detail' article.slug %}">{{ article.title }}</a></h3>
+										
+										<p>{{ article.content|truncatewords:10}}</p>
+										<div class="meta">
+										<div><a href="#"><span class="icon-calendar"></span> {{ article.created_at }}</a></div>
+										</div>
+									</div>
+									</div>
+								</div>
+								{% empty %}
+								<p>No blog articles available.</p>
+								{% endfor %}
+								</div>
+							
+							
+					</div>
+					
+         
+                </div>
+            </div>
+    </section>
+
+  <!--<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
     	<div class="container">
 				<div class="row d-md-flex align-items-center">
           <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
@@ -480,19 +520,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
-    <section class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-7 ftco-animate text-center">
-						<h2>I'm <span>Available</span> for freelancing</h2>
-						<p>A small river named girna flows by their place and supplies it with the necessary regelialia.</p>
-						<p class="mb-0"><a href="#" class="btn btn-primary py-3 px-5">Hire me</a></p>
-					</div>
-				</div>
-			</div>
-		</section>-->
+    
 
     <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
       <div class="container">

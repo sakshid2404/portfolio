@@ -1,0 +1,19 @@
+
+<h1>{{ article.title }}</h1> 
+{% if article.image %}
+<img src="{{ article.image.url }}" alt="{{ article.title }}" height="200px">
+{% endif %}
+<p>{{ article.content }}</p>
+<p><i>Posted on {{ article.created_at }}</i></p>
+
+
+
+
+<form action="{% url 'like_post' article.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" name="submit" class="btn btn-primary">
+        Like
+    </button>
+     - {{ article.total_likes_count }} 
+</form>
+    

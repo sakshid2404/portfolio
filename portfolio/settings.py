@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'website',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
+    'website',
+   
 ]
 
 MIDDLEWARE = [
@@ -55,7 +58,8 @@ ROOT_URLCONF = 'portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
+        
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -106,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -122,6 +126,11 @@ STATICFILES_DIRS = [
     BASE_DIR / 'website' / 'static',
 
 ]
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 
 
 

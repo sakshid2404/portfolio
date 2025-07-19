@@ -1,9 +1,6 @@
 from django.shortcuts import render
-
+from blog.models import Article
 
 def index(request):
-  
-    return render(
-        request=request,
-        template_name="website/index.html"
-    )
+    Articles = Article.objects.all()
+    return render(request, 'website/index.html',{'articles': Articles})
