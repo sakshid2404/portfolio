@@ -1,30 +1,42 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Article
-from django.http import HttpResponseRedirect, HttpResponseNotAllowed
+from django.views.generic import DetailView, View
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.http import HttpResponseNotAllowed
 from django.urls import reverse
 
-def blog_detail(request, slug):
-    article = get_object_or_404(Article, slug=slug)
-    context = {
-        'article': article,
-        'total_likes': article.total_likes_count,
+from .models import Article 
+
+
+class ArticleDetailView(DetailView):
+    model = Article 
+    template_name = 'blog/blog_detail.html' 
+    context_object_name = 'article' 
+
+   
+
+    def get_context_data(self, **kwargs):
        
-    }
-    return render(request, 'blog/blog_detail.html', context)
+        context = super().get_context_data(**kwargs)
+        
+        context['total_likes'] = self.object.total_likes_count 
+        return context
 
 
+class ArticleLikeView(LoginRequiredMixin, View):
+   
 
-@login_required
-def like_view(request, pk):
-    if request.method == 'POST':
+    def post(self, request, pk, *args, **kwargs):
+       
         article = get_object_or_404(Article, pk=pk)
 
-        # Increment the count directly
+       
         article.total_likes_count += 1
-        article.save() # Save the changes to the database
+        article.save()
 
-        # Redirect back to the blog detail page using the article's slug
-        return HttpResponseRedirect(reverse('blog_detail', args=[article.slug]))
-    else:
+        return redirect(reverse('blog_detail', args=[article.slug]))
+
+    def get(self, request, pk, *args, **kwargs):
+      
         return HttpResponseNotAllowed(['POST'])
+
+   

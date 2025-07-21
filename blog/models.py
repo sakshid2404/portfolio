@@ -11,12 +11,6 @@ class Article(models.Model):
     
     total_likes_count = models.IntegerField(default=0)
 
-    
-
-    # def total_likes(self):
-    #     return self.likes.count()
-
-   
 
     def __str__(self):
         return self.title

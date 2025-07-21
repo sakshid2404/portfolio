@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views
+from .views import ArticleDetailView, ArticleLikeView 
 
 urlpatterns = [
-    path('<slug:slug>/', views.blog_detail, name='blog_detail'),
-    path('like/<int:pk>',views.like_view, name='like_post'),
+ 
+    path('slug:<slug:slug>/', ArticleDetailView.as_view(), name='blog_detail'),
+    path('like/<int:pk>/', ArticleLikeView.as_view(), name='like_post'),
 ]
-
