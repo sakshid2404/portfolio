@@ -10,10 +10,11 @@ from .models import Article
 class ArticleDetailView(DetailView):
     model = Article 
     template_name = 'blog/blog_detail.html' 
+   
     context_object_name = 'article' 
 
    
-
+    
     def get_context_data(self, **kwargs):
        
         context = super().get_context_data(**kwargs)
@@ -39,4 +40,7 @@ class ArticleLikeView(LoginRequiredMixin, View):
       
         return HttpResponseNotAllowed(['POST'])
 
+
+def get_queryset(self):
+        return Article.objects.all().order_by('-created_at')
    
