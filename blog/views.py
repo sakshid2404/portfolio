@@ -1,10 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, View
+from django.views.generic import DetailView,CreateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponseNotAllowed
+from django.urls import reverse_lazy
 from django.urls import reverse
 
 from .models import Article 
+
+class ArticleCreateView(CreateView):
+    model = Article
+    template_name = 'blog/create.html'
+    fields = ['title', 'content', 'slug', 'image']
+    success_url = reverse_lazy('index')
 
 
 class ArticleDetailView(DetailView):

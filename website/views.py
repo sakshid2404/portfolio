@@ -7,3 +7,7 @@ def index(request):
 
 def resume_view(request):
     return render(request, 'website/resume.html')
+
+
+
+

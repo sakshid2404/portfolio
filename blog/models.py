@@ -8,7 +8,6 @@ class Article(models.Model):
     slug = models.SlugField()
     image = models.ImageField(upload_to="blog/")
     created_at = models.DateTimeField(auto_now_add=True)
-    
     total_likes_count = models.IntegerField(default=0)
 
 

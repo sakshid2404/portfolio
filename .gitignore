@@ -2,3 +2,4 @@ __pycache__
 Kelly-1.0.0
 db.sqlite3
 uploads
+db.sqlite3*
